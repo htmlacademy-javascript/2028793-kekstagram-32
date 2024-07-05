@@ -24,14 +24,29 @@ console.log ('Тест №1. Ожидаю "true", получаю - ', checkPalin
 
 function checkNumberInStr (str) {
   let emptyStr = '';
-  for (let i = 0; i <= str.length - 1; i++) {
-    if (str[i] >= 0) {
+  for (let i = 0; i <= str.length-1; i++) {
+    if (!Number.isNaN(Number(str[i])) && str[i] !== ' ') {
       emptyStr += str[i];
     }
-    parseInt(emptyStr, 10);
-	if (emptyStr.length )
   }
+  return emptyStr ? Number(emptyStr) : NaN;
+
 }
 
-// Проверка
+// Вывод чисел из строки
 console.log ('Тест №1. Ожидаю число, получаю - ', checkNumberInStr ('2023 год'));
+
+function checkNumberInStr (str) {
+	let emptyStr = '';
+	const convertString = String(str);
+	for (let i = 0; i <= convertString.length-1; i++) {
+	  if (!Number.isNaN(Number(convertString[i])) && convertString[i] !== ' ') {
+		emptyStr += convertString[i];
+	  }
+	}
+	return emptyStr ? Number(emptyStr) : NaN;
+
+  }
+
+  // Вывод, если приходит число
+  console.log ('Тест №1. Ожидаю число, получаю - ', checkNumberInStr (2023));
