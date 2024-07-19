@@ -1,10 +1,12 @@
-//Task-1
+//task_1
+
 function checkLengthString (str, maxLength) {
   return (str.length <= maxLength);
 }
-checkLengthString();
+checkLengthString ('проверяемая строка', 20);
 
-//Task-2
+//task_2
+
 function checkPalindrome (str) {
   const newStr = str.replaceAll(' ', '').toLowerCase();
   let emptyStr = '';
@@ -14,22 +16,26 @@ function checkPalindrome (str) {
   }
   return (emptyStr === newStr);
 }
-checkPalindrome();
+checkPalindrome('Лёша на полке клопа нашёл ');
 
-//Task-3.1
+//task_3.1
+
 function checkNumberInStr (str) {
   let emptyStr = '';
   for (let i = 0; i <= str.length - 1; i++) {
+
     if (!Number.isNaN(Number(str[i])) && str[i] !== ' ') {
       emptyStr += str[i];
-    }
-  }
-  return emptyStr ? Number(emptyStr) : NaN;
-}
-checkNumberInStr();
 
-//Task-3.2
-function checkNumberInNum (str) {
+    }
+    return emptyStr ? Number(emptyStr) : NaN;
+  }
+}
+checkNumberInStr('ECMAScript 2022');
+
+//task_3.2
+
+function checkNumberInNumber (str) {
   let emptyStr = '';
   const convertString = String(str);
   for (let i = 0; i <= convertString.length - 1; i++) {
@@ -39,5 +45,4 @@ function checkNumberInNum (str) {
   }
   return emptyStr ? Number(emptyStr) : NaN;
 }
-checkNumberInNum();
-
+checkNumberInNumber (2024);
