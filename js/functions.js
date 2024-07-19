@@ -23,10 +23,10 @@ checkPalindrome('Лёша на полке клопа нашёл ');
 function checkNumberInStr (str) {
   let emptyStr = '';
   for (let i = 0; i <= str.length - 1; i++) {
-    for (let i = 0; i <= str.length - 1; i++) {
-      if (!Number.isNaN(Number(str[i])) && str[i] !== ' ') {
-        emptyStr += str[i];
-      }
+
+    if (!Number.isNaN(Number(str[i])) && str[i] !== ' ') {
+      emptyStr += str[i];
+
     }
     return emptyStr ? Number(emptyStr) : NaN;
   }
