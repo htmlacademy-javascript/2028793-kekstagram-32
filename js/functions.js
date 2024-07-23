@@ -1,3 +1,4 @@
+/*
 //task_1
 
 function checkLengthString (str, maxLength) {
@@ -46,3 +47,33 @@ function checkNumberInNumber (str) {
   return emptyStr ? Number(emptyStr) : NaN;
 }
 checkNumberInNumber (2024);
+*/
+
+
+//module5-task2
+function getTimeinMin (time) {
+  const [hours, minutes] = time.split(':');
+  const minutesConvert = 60;
+  return hours * minutesConvert + parseInt(minutes, 10);
+}
+
+function checkMeetingTime (startWorkingDay, finishWorkingDay, startMeetingTime, durationMeeting) {
+  const startWorkingDayInMin = getTimeinMin(startWorkingDay);
+  const finishWorkingDayInMin = getTimeinMin(finishWorkingDay);
+  const startMeetingTimeInMin = getTimeinMin(startMeetingTime);
+
+  return startMeetingTimeInMin >= startWorkingDayInMin &&
+  startMeetingTimeInMin + durationMeeting <= finishWorkingDayInMin;
+}
+
+/*
+'8:00' - начало рабочего дня
+'17:30' - конец рабочего дня
+'14:00' - начало встречи
+90 - продолжительность встречи в минутах
+*/
+(checkMeetingTime('08:00', '17:30', '14:00', 90)); // true
+(checkMeetingTime('8:0', '10:0', '8:0', 120)); // true
+(checkMeetingTime('08:00', '14:30', '14:00', 90)); // false
+(checkMeetingTime('14:00', '17:30', '08:0', 90)); // false
+(checkMeetingTime('8:00', '17:30', '08:00', 900)); // false
