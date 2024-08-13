@@ -1,7 +1,7 @@
 import {isEscapeKey} from './util.js';
 
 const bigPictureContainer = document.querySelector('.big-picture');
-const socialCommentCount = bigPictureContainer.querySelector('.social__comment-count');
+const socialCommentCountElement = bigPictureContainer.querySelector('.social__comment-count');
 const commentsLoader = bigPictureContainer.querySelector('.comments-loader');
 const fullSizeImageClose = bigPictureContainer.querySelector('.big-picture__cancel');
 const socialCommentsContainer = bigPictureContainer.querySelector('.social__comments');
@@ -43,12 +43,11 @@ const generateComments = (comments, container) => {
 };
 
 fullSizeImageClose.addEventListener('click', closeBigPicture);
-// bigPictureContainer.addEventListener('click', closeBigPicture);
 
 const getShownCommentsCount = () => document.querySelectorAll('.social__comments > li').length;
 
 const updateShownCount = () => {
-  bigPictureContainer.querySelector('.social__comment-shown-count').textContent = getShownCommentsCount();
+  socialCommentCountElement.textContent = getShownCommentsCount();
 };
 
 const showFullSizePicture = ({url, description, likes, comments}) => {
