@@ -4,6 +4,8 @@ const bigPictureContainer = document.querySelector('.big-picture');
 const socialCommentCount = bigPictureContainer.querySelector('.social__comment-count');
 const commentsLoader = bigPictureContainer.querySelector('.comments-loader');
 const fullSizeImageClose = bigPictureContainer.querySelector('.big-picture__cancel');
+const socialCommentsContainer = bigPictureContainer.querySelector('.social__comments');
+const commentsPerPage = 5;
 
 const closeBigPicture = () => {
   bigPictureContainer.classList.add('hidden');
@@ -30,7 +32,6 @@ const createComment = ({avatar, name, message}) => {
 };
 
 const generateComments = (comments, container) => {
-  container.innerHTML = '';
   const fragment = document.createDocumentFragment();
 
   comments.forEach((comment) => {
@@ -42,22 +43,40 @@ const generateComments = (comments, container) => {
 };
 
 fullSizeImageClose.addEventListener('click', closeBigPicture);
-bigPictureContainer.addEventListener('click', closeBigPicture);
+// bigPictureContainer.addEventListener('click', closeBigPicture);
+
+const getShownCommentsCount = () => document.querySelectorAll('.social__comments > li').length;
+
+const updateShownCount = () => {
+  bigPictureContainer.querySelector('.social__comment-shown-count').textContent = getShownCommentsCount();
+};
 
 const showFullSizePicture = ({url, description, likes, comments}) => {
-
-  const showComments = document.querySelectorAll('.social__comments > li');
+  socialCommentsContainer.innerHTML = '';
   bigPictureContainer.querySelector('.big-picture__img > img').src = url;
   bigPictureContainer.querySelector('.likes-count').textContent = likes;
-  bigPictureContainer.querySelector('.social__comment-shown-count').textContent = showComments.length;
   bigPictureContainer.querySelector('.social__comment-total-count').textContent = comments.length;
   bigPictureContainer.querySelector('.social__caption').textContent = description;
-  generateComments(comments, bigPictureContainer.querySelector('.social__comments'));
+
+  const showNextComments = () => {
+    const shownCommentsCount = getShownCommentsCount();
+    const nextComments = comments.slice(shownCommentsCount, shownCommentsCount + commentsPerPage);
+    generateComments(nextComments, socialCommentsContainer);
+    updateShownCount();
+    if (getShownCommentsCount() < comments.length) {
+      commentsLoader.classList.remove('hidden');
+    } else {
+      commentsLoader.classList.add('hidden');
+    }
+  };
+
+  showNextComments();
+  commentsLoader.addEventListener('click', showNextComments);
 
   bigPictureContainer.classList.remove('hidden');
   document.querySelector('body').classList.add('modal-open');
-  socialCommentCount.classList.add('hidden');
-  commentsLoader.classList.add('hidden');
+  // socialCommentCount.classList.add('hidden');
+  // commentsLoader.classList.add('hidden');
 
   document.addEventListener('keydown', closeBigPictureWithEsc);
 };
